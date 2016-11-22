@@ -1,5 +1,13 @@
-FROM debian:stretch
-MAINTAINER David Personette <dperson@gmail.com>
+FROM node:latest
+MAINTAINER dman1680
+
+LABEL "version"="0.0.1"
+
+# allow self-sign certs (open to MitM)
+RUN echo "" | openssl s_client -host registry.npmjs.org -port 443 -showcerts | awk '/BEGIN CERT/ {p=1} ; p==1; /END CERT/ {p=0}' > /usr/local/share/ca-certificates/npmjs.org.crt
+RUN update-ca-certificates
+RUN npm config set cafile "/etc/ssl/certs/npmjs.org.pem"
+RUN git config --global http.sslVerify false
 
 # Install samba
 RUN export DEBIAN_FRONTEND='noninteractive' && \
@@ -28,6 +36,21 @@ COPY samba.sh /usr/bin/
 
 VOLUME ["/etc/samba"]
 
-EXPOSE 137/udp 138/udp 139 445
+# node setup
+RUN npm  install -g node-gyp
+ENV NODE_PATH=/usr/local/lib/node_modules/:/usr/local/lib NODE_ENV=development
+
+# johnpapa/angular2-tour-of-heroes setup
+RUN mkdir -p /usr/src
+WORKDIR /usr/src
+RUN git clone https://github.com/johnpapa/angular2-tour-of-heroes.git toh
+WORKDIR /usr/src/toh
+RUN npm install
+RUN chmod -R 776 *
+
+EXPOSE 137/udp 138/udp 139 445 8000 3001
 
 ENTRYPOINT ["samba.sh"]
+
+# launch app 
+CMD [ "npm", "start" ]
