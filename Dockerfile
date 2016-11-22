@@ -37,7 +37,7 @@ COPY samba.sh /usr/bin/
 VOLUME ["/etc/samba"]
 
 # node setup
-RUN npm  install -g node-gyp
+RUN npm install -g node-gyp
 ENV NODE_PATH=/usr/local/lib/node_modules/:/usr/local/lib NODE_ENV=development
 
 # johnpapa/angular2-tour-of-heroes setup
