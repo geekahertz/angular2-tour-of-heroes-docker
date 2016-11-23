@@ -3,11 +3,11 @@ MAINTAINER dman1680
 
 LABEL "version"="0.0.1"
 
-# allow self-sign certs (open to MitM)
-RUN echo "" | openssl s_client -host registry.npmjs.org -port 443 -showcerts | awk '/BEGIN CERT/ {p=1} ; p==1; /END CERT/ {p=0}' > /usr/local/share/ca-certificates/npmjs.org.crt
-RUN update-ca-certificates
-RUN npm config set cafile "/etc/ssl/certs/npmjs.org.pem"
-RUN git config --global http.sslVerify false
+# uncomment to allow self-sign certs if you are behind a coporate CA (open to MitM)
+#RUN echo "" | openssl s_client -host registry.npmjs.org -port 443 -showcerts | awk '/BEGIN CERT/ {p=1} ; p==1; /END CERT/ {p=0}' > /usr/local/share/ca-certificates/npmjs.org.crt
+#RUN update-ca-certificates
+#RUN npm config set cafile "/etc/ssl/certs/npmjs.org.pem"
+#RUN git config --global http.sslVerify false
 
 # Install samba
 RUN export DEBIAN_FRONTEND='noninteractive' && \
@@ -37,7 +37,7 @@ COPY samba.sh /usr/bin/
 VOLUME ["/etc/samba"]
 
 # node setup
-RUN npm  install -g node-gyp
+RUN npm install -g node-gyp
 ENV NODE_PATH=/usr/local/lib/node_modules/:/usr/local/lib NODE_ENV=development
 
 # johnpapa/angular2-tour-of-heroes setup
