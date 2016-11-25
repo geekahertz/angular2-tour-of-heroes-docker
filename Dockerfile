@@ -51,7 +51,6 @@ RUN chmod -R 776 *
 EXPOSE 137/udp 138/udp 139 445 8000 3001
 
 # launch app 
-ENTRYPOINT ["npm"]
-CMD ["start" ]
+CMD ["npm","start" ]
 
 
