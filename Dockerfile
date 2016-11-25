@@ -50,7 +50,8 @@ RUN chmod -R 776 *
 
 EXPOSE 137/udp 138/udp 139 445 8000 3001
 
-ENTRYPOINT ["samba.sh"]
-
 # launch app 
-CMD [ "npm", "start" ]
+ENTRYPOINT ["npm"]
+CMD ["start" ]
+
+
