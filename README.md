@@ -14,28 +14,27 @@ or
     docker run -p 139:139 -p 445:445 -p 8000:8000 -p 3001:3001 -d dman1680/angular2-tour-of-heroes
         
 ## Accessing container
-
-Find docker machine ip
+### Find docker machine ip
 
     docker-machine ip
 
-Find container id
+### Find container id
 
     docker ps
 
-Browse demo webpage
+### Browse demo webpage
     
     http://<docker machine ip>:8000
 
-Setup network share access
+### Setup network share access
 
     docker exec -d <container id> samba.sh -u "testuser;pass" -s "usr;/usr;no;no;no;testuser"
 
-Access network share folder
+### Access network share folder
     
     \\<docker machine ip>\usr
     # login: testuser / pass
 
-Enter container's bash
+### Enter container's bash
     
     docker exec -it <container id> bash
