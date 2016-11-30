@@ -1,6 +1,7 @@
 # angular2-tour-of-heroes
 
 Samba docker container for learning Angular2: John Papa's Tour of Heros Demo
+(folked from https://github.com/dperson/samba)
 
 # How to use this image
 ## Host setup
