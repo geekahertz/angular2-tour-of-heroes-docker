@@ -11,9 +11,13 @@ Samba docker container for learning Angular2: John Papa's Tour of Heros Demo
 or 
 - Hyper-V (see https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install)
 
+## Build Image (optional: when not using dockerhub)
+
+    docker build --no-cache -t dman1680/angular2-tour-of-heroes .
+    
 ## Running container
 
-    docker run -p 139:139 -p 445:445 -p 8000:8000 -p 3001:3001 -d --name toh dman1680/angular2-tour-of-heroes
+    docker run -p 139:139 -p 445:445 -p 8000:8000 -p 3001:3001 -d --name ng2toh dman1680/angular2-tour-of-heroes
         
 ## Find docker machine ip
 
@@ -25,7 +29,7 @@ or
 
 ## Setup network share access
 
-    docker exec -d toh samba.sh -u "testuser;pass" -s "usr;/usr;no;no;no;testuser"
+    docker exec -d ng2toh samba.sh -u "testuser;pass" -s "usr;/usr;no;no;no;testuser"
 
 ## Access network share folder
     
@@ -34,7 +38,7 @@ or
 
 ## Enter container's bash
     
-    docker exec -it toh bash
+    docker exec -it ng2toh bash
 
 # Details from dperson/samba
 
