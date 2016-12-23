@@ -13,7 +13,7 @@ or
 
 ## Build Image (optional: when not using dockerhub)
 
-    docker build --no-cache -t dman1680/angular2-tour-of-hero .
+    docker build --no-cache -t dman1680/angular2-tour-of-heros .
     
 ## Running container
 
