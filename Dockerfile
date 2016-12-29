@@ -45,9 +45,9 @@ ENV NODE_PATH=/usr/local/lib/node_modules/:/usr/local/lib NODE_ENV=development
 RUN mkdir -p /usr/src
 WORKDIR /usr/src
 RUN git clone https://github.com/johnpapa/angular2-tour-of-heroes.git toh
+RUN chmod -R 776 *
 WORKDIR /usr/src/toh
 RUN npm install
-RUN chmod -R 776 *
 
 EXPOSE 137/udp 138/udp 139 445 8000 3001
 
